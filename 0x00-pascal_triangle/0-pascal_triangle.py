@@ -3,24 +3,24 @@
 
 
 def pascal_triangle(n):
-  """This is a function that returns a list of lists of
-  integers representing the Pascal's triangle of n"""
-  if n <= 0:
-    return []
+    """Generates Pascal's triangle of n rows
+    and returns it as a list of lists."""
+    if n <= 0:
+        return []
 
-  l = []
+    pascal = []
 
-  for i in range(n):
-    sec_l = []
-    if i == 0:
-      l.append([1])
-    else:
-      for j in range(i + 1):
-        if j == 0 or j == i:
-          sec_l.append(1)
+    for i in range(n):
+        current_row = []
+        if i == 0:
+            pascal.append([1])
         else:
-          value = l[i - 1][j] + l[i - 1][j - 1]
-          sec_l.append(value)
-      l.append(sec_l)
+            for j in range(i + 1):
+                if j == 0 or j == i:
+                    current_row.append(1)
+                else:
+                    value = pascal[i - 1][j] + pascal[i - 1][j - 1]
+                    current_row.append(value)
+            pascal.append(current_row)
 
-  return l
+    return pascal
