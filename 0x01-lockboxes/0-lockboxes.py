@@ -1,15 +1,17 @@
 #!/usr/bin/python3
 def canUnlockAll(boxes):
-	viseted=[]
-	successeur=boxes[0]
-	while  successeur:
-		i=successeur.pop()
-		if i not in viseted:
-			viseted.append(i)
-			for j in range (len(boxes[i])):
-				successeur.append(boxes[j])
-	for i in range (len(boxes)):
-		for j in range (len(boxes[i])):
-			if j not in  viseted:
-				return False 
-	return False
+    if not boxes or not boxes[0]:
+        return False  # First box is not unlocked
+
+    n = len(boxes)
+    unlocked_boxes = {0}  # Set to keep track of unlocked boxes
+
+    def explore(box_index):
+        for key in boxes[box_index]:
+            if key not in unlocked_boxes and 0 <= key < n:
+                unlocked_boxes.add(key)
+                explore(key)
+
+    explore(0)  # Start exploring from the first box
+
+    return len(unlocked_boxes) == n
