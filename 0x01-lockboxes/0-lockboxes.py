@@ -1,17 +1,27 @@
 #!/usr/bin/python3
+"""Defining canUnlockAll function"""
+
+
 def canUnlockAll(boxes):
-    if not boxes or not boxes[0]:
-        return False  # First box is not unlocked
+    """This is a function that returns True if all boxes
+        can be opened, else return False"""
+    if not boxes:
+        return False
 
-    n = len(boxes)
-    unlocked_boxes = {0}  # Set to keep track of unlocked boxes
+    # Initialize a set to track the opened boxes
+    opened_boxes = {0}
 
-    def explore(box_index):
-        for key in boxes[box_index]:
-            if key not in unlocked_boxes and 0 <= key < n:
-                unlocked_boxes.add(key)
-                explore(key)
+    # Initialize a set to track the keys that need to be checked
+    keys_to_check = set(boxes[0])
 
-    explore(0)  # Start exploring from the first box
+    # Continue checking boxes until no more keys are left to check
+    while keys_to_check:
+        key = keys_to_check.pop()
 
-    return len(unlocked_boxes) == n
+        # Check if the key opens a box that hasn't been opened yet
+        if key < len(boxes) and key not in opened_boxes:
+            opened_boxes.add(key)
+            keys_to_check.update(boxes[key])
+
+    # Check if all boxes have been opened
+    return len(opened_boxes) == len(boxes)
