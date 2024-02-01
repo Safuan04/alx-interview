@@ -14,7 +14,7 @@ def validUTF8(data):
         # Check if the most significant bit (MSB) is 0
         if (data[i] & 0b10000000) == 0:
             # If MSB is 0, it's a single-byte character (ASCII)
-            if data[i] <= 127:
+            if data[i] <= 128:
                 continue  # Move to the next character
             else:
                 return False  # Invalid ASCII character (MSB is 0 but value > 128)
