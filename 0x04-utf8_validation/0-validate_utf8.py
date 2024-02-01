@@ -3,11 +3,7 @@
 
 
 def validUTF8(data):
-    """ This is a method that determines if a given data set 
-    -   represents a valid UTF-8 encoding
-    """
-def validUTF8(data):
-    """ This is a method that determines if a given data set 
+    """ This is a method that determines if a given data set
     -   represents a valid UTF-8 encoding
     """
     for i in range(len(data)):
@@ -15,9 +11,9 @@ def validUTF8(data):
         if (data[i] & 0b10000000) == 0:
             # If MSB is 0, it's a single-byte character (ASCII)
             if data[i] <= 128:
-                continue  # Move to the next character
+                continue
             else:
-                return False  # Invalid ASCII character (MSB is 0 but value > 128)
+                return False
         else:
             # If MSB is 1, it's the start of a multi-byte character
             # Determine the number of bytes for this character
