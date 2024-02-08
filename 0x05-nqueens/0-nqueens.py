@@ -2,6 +2,9 @@
 
 """Solves the N-Queens problem."""
 
+import sys
+
+
 def n_queens(N: int):
     """Returns all possible solutions for N queens in an NxN board."""
     columns = set()
@@ -40,15 +43,19 @@ def n_queens(N: int):
 
 def main():
     """Main function."""
-    arguments = input("Enter N: ")
-    if not arguments.isdigit():
-        print("N must be a number")
-        exit(1)
+    if len(sys.argv) != 2:
+        print("Usage: nqueens N")
+        sys.exit(1)
 
-    N = int(arguments)
+    try:
+        N = int(sys.argv[1])
+    except ValueError:
+        print("N must be a number")
+        sys.exit(1)
+
     if N < 4:
         print("N must be at least 4")
-        exit(1)
+        sys.exit(1)
 
     solutions = n_queens(N)
     for solution in solutions:
