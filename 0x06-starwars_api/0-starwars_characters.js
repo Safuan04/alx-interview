@@ -3,14 +3,12 @@
 const process = require('process');
 const request = require('request');
 
-
 const argv = process.argv;
 
-const URL = 'https://swapi-api.alx-tools.com/api/films/'
+const URL = 'https://swapi-api.alx-tools.com/api/films/';
 const moviePosition = argv[2];
 
-
-function fetchData(characterUrl) {
+function fetchData (characterUrl) {
   return new Promise((resolve, reject) => {
     request(characterUrl, (error, response, body) => {
       if (error) {
@@ -22,12 +20,12 @@ function fetchData(characterUrl) {
   });
 }
 
-async function displayData() {
+async function displayData () {
   try {
     const movieResponse = await new Promise((resolve, reject) => {
       request(URL, (error, response, body) => {
         if (error) {
-          reject(`Error fetching films data: ${error}`);
+          reject(new Error(`Error fetching films data: ${error}`));
         } else {
           resolve(body);
         }
